@@ -52,6 +52,11 @@ address CreateNodeOperator(char input);
 double kalkulasi(address P);
 float operasi_trigono(char* tes,float oprtr);
 
+//Tendy
+float Perkalian(float bilangan1, float bilangan2);
+float akar_pangkat_n(int x,int n);
+float Perpangkatan(float bilangan, float pangkat);
+
 
 
 #endif
