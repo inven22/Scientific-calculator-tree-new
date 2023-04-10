@@ -57,7 +57,16 @@ float Perkalian(float bilangan1, float bilangan2);
 float akar_pangkat_n(int x,int n);
 float Perpangkatan(float bilangan, float pangkat);
 
+//Mahira
+float persen(float bil);
+float faktorial(float bil);
+float asinus(float bil);
+float acosinus(float bil);
+float atangen(float bil);
 
+float mutlak(float bil);
+float arcsin(float bil);
+float squareroot(float x);
 
 #endif
 
