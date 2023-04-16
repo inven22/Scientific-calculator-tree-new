@@ -8,30 +8,30 @@
 
 typedef char infotype;
 typedef struct Elemen *address;
-typedef struct Elemen{
+typedef struct Elemen {
 	infotype data;
 	float operand;
 	address right;
 	address left;
 	int isOperator;
-}Tree;
+} Tree;
 
 typedef struct Node *node;
-typedef struct Node{
+typedef struct Node {
 	node next;
 	infotype oprtr;
 	float operand;
 	int isoperator;
-}ElmtList;
-
-typedef struct{
-node Head;
-}Stack;
+} ElmtList;
 
 typedef struct {
-node First;
-node Last;
-}Queue;
+	node Head;
+} Stack;
+
+typedef struct {
+	node First;
+	node Last;
+} Queue;
 
 
 void InfixToPostfix(infotype* input, infotype postfix[]);
@@ -51,11 +51,17 @@ address CreateNodeOperand(float input);
 address CreateNodeOperator(char input);
 double kalkulasi(address P);
 float operasi_trigono(char* tes,float oprtr);
+float DequeOperand(Queue *A);
+float operasi_trigono(char* tes,float oprtr);
+float operasilog(float a,float b,char *tes,int basis_bebas);
 
 //Tendy
 float Perkalian(float bilangan1, float bilangan2);
 float akar_pangkat_n(int x,int n);
 float Perpangkatan(float bilangan, float pangkat);
+float cosecan(float oprtr);
+float secan(float oprtr);
+float cotangen(float oprtr);
 
 //Mahira
 float persen(float bil);
@@ -67,6 +73,18 @@ float atangen(float bil);
 float mutlak(float bil);
 float arcsin(float bil);
 float squareroot(float x);
+
+//Agista
+double cosinus(double degree);
+double tangen(double degree);
+double sinus(double degree);
+double to_radian(double degree);
+
+
+//Ahmad
+int loga(int a);
+int log_a_to_base_b(int a, int b);
+
 
 #endif
 

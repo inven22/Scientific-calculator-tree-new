@@ -56,3 +56,25 @@ float Perpangkatan(float bilangan, float pangkat){
 	}
  	
  }
+ 
+ 
+ int log_a_to_base_b(int a, int b)
+{
+    return log2(a) / log2(b);
+}
+
+int loga(int a){
+	return log10(a);
+}
+
+float cosecan(float oprtr){
+	return (1/sinus(oprtr));
+}
+
+float secan(float oprtr){
+	return (1/cosinus(oprtr));
+}
+
+float cotangen(float oprtr){
+	return (1/tangen(oprtr));
+}

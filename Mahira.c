@@ -1,6 +1,9 @@
+
 #include <stdio.h>
 #include <math.h>
 #include "header.h"
+#define phi 3.14
+
 
 float persen(float bil)
 {
@@ -43,7 +46,7 @@ float asinus(float bil)
     float term = bil;
     int n = 1;
 //    mutlak(term) > 0.000000000001
-    while(mutlak(term) > 0.000000000001) 
+    while(mutlak(term) > 0.000001) 
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
 		sum = sum + term;
@@ -58,7 +61,7 @@ float acosinus(float bil)
     float term = bil;
     int n = 1;
 //    mutlak(term) > 0.000000000001
-    while(mutlak(term) > 0.000000000001) 
+    while(mutlak(term) > 0.000001) 
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
 		sum = sum + term;
@@ -105,3 +108,4 @@ float atangen(float bil)
 	sum = acosinus(bagi);
 	return sum;
 }
+
