@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
-
 #include "header.h"
 
 void InfixToPostfix(infotype* input, infotype postfix[]){
@@ -63,6 +62,60 @@ int derajatOperator(infotype oper){
 		printf("Error, Operator Tidak Diketahui: %c", oper);
         exit(1);
 	}
+}
+
+float operasi_trigono(char* tes,float oprtr){
+	float hasil;
+	if (strcmp(tes,"sin(")==0){
+		hasil=sinus(oprtr);
+		return hasil;
+	}else if (strcmp(tes,"cos(")==0){
+		hasil=cosinus(oprtr);
+		return hasil;
+	}else if (strcmp(tes,"tan(")==0){
+		hasil=tangen(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"csc(")==0){
+		hasil=cosecan(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"sec(")==0){
+		hasil=cosecan(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"cot(")==0){
+		hasil=cotangen(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"asin(")==0){
+		hasil=asinus(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"acos(")==0){
+		hasil=acosinus(oprtr);
+		return hasil;
+	}else if(strcmp(tes,"atan(")==0){
+		hasil=atangen(oprtr);
+		return hasil;
+	}
+	else{
+		printf("format salah");
+		return 0;
+	}
+}
+
+float operasilog(float a,float b,char *tes,int basis_bebas){
+	float hasil;
+	if(strcmp(tes,"log(")==0){
+		if(basis_bebas==1){
+		hasil=log_a_to_base_b(b,a);
+		return hasil;	
+		}
+		else{
+		hasil=loga(b);
+		return hasil;
+		}
+	}else{
+	printf("format yang dimasukkan. mungkin yang anda maksud:basislog(angka)");
+	return 0;
+	}
+	
 }
 
 int isOperator(infotype oper){
@@ -187,7 +240,7 @@ void ViewAscStack(Stack First){
 }
 
 void EnqueOperator(Queue *First,char item,node *P){
-	*P = (address) malloc (sizeof (ElmtList));
+	*P = (node) malloc (sizeof (ElmtList));
 	if(P==NULL){
 		printf("Gagal Alokasi");
 	}else{
@@ -208,7 +261,7 @@ void EnqueOperator(Queue *First,char item,node *P){
 }
 
 void EnqueOperand(Queue *First,float item,node *P){
-	*P = (address) malloc (sizeof (ElmtList));
+	*P = (node) malloc (sizeof (ElmtList));
 	if(P==NULL){
 		printf("Gagal Alokasi");
 	}else{
@@ -230,28 +283,34 @@ void EnqueOperand(Queue *First,float item,node *P){
 //float kalkulasi()
 void convertPostfix(Queue *Z,Stack *X,char *input){
 	node P;
-	char token,c;
+	char token,c,negatif;
 	int num3=10;
 	int i,temp;
 	float num=0,num2;
 	for(i=0;i<strlen(input);i++){
 		token=input[i];
-		if(isdigit(token)||token=='.'){
+		if(isdigit(token)||token=='.'||(token=='-'&&(isOperator(input[i-1])||i==0||input[i-1]=='('))){
 			if(isdigit(token)){
-			num=num*10+(token-'0');
+				num=num*10+(token-'0');
 			}else if(token=='.'){
-			i++;
-			while(isdigit(input[i])){
-			num2=(input[i]-'0');
-			num=num+(num2/num3);	
-			num3=num3*10;
-			i++;
+				i++;
+				while(isdigit(input[i])){
+				num2=(input[i]-'0');
+				num=num+(num2/num3);	
+				num3=num3*10;
+				i++;
 			}
 			num3=10;
 			i--;
+			}else if(token=='-'){
+				negatif='-';
 			}
 			 if(isdigit(input[i+1])!=1&&input[i+1]!='.'){
-				EnqueOperand(&*Z,num,&P);
+			 	if(negatif=='-'){
+			 		num=num*-1;
+				 }
+				negatif='\0';
+				EnqueOperand(&*Z, num,&P);
 				num=0;
 			}
 		}else if(isOperator(token)&&X->Head!=NULL&&X->Head->oprtr!='('){
@@ -272,8 +331,120 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				printf("format yang dimasukkan salah\n");
 				break;
 			}
-		}else if(token=='('){
+		}
+		else if(token=='('){
 			PushStack(&*X,token,&P);
+		}else if(token=='s'||token=='c'||token=='t'){
+			float hasil3=0,hasil2;
+			int o=1,t=1;
+			char valid[5];
+			valid[4]='\0';
+			valid[5]='\0';
+			valid[0]=token;
+			i++;
+			while(t<4){
+				valid[o]=input[i];
+				i++;
+				o++;
+				t++;
+			}
+			while((isdigit(input[i])||input[i]=='.')&&input[i]!=')'){
+				if(isdigit(input[i])){
+				hasil3=hasil3*10+(input[i]-'0');
+				i++;
+				}
+				
+			}
+			if(input[i]==')'){
+				hasil2=operasi_trigono(valid,hasil3);
+				EnqueOperand(&*Z,hasil2,&P);
+			}else{
+				printf("format yang dimasukkan salah");
+				break;
+			}
+		}else if(token=='a'){
+			float hasil3=0,hasil2,hasil1=10;
+			int o=1,t=1;
+			char valid[6];
+			valid[5]='\0';
+			valid[6]='\0';
+			valid[0]=token;
+			i++;
+			while(t<5){
+				valid[o]=input[i];
+				i++;
+				o++;
+				t++;
+			}
+			while((isdigit(input[i])||input[i]=='.')&&input[i]!=')'){
+				if(isdigit(input[i])){
+				hasil3=hasil3*10+(input[i]-'0');
+				i++;
+				}
+				else if(input[i]=='.'){
+				i++;
+				while(isdigit(input[i])){
+				hasil2=(input[i]-'0');
+				hasil3=hasil3+(hasil2/hasil1);	
+				hasil1=hasil1*10;
+				i++;
+			}
+			hasil1=10;
+			i--;
+			i++;
+			}
+			}
+			if(input[i]==')'){
+				hasil2=operasi_trigono(valid,hasil3);
+				EnqueOperand(&*Z,hasil2,&P);
+			}else{
+				printf("format yang dimasukkan salah");
+				break;
+			}
+		}else if(token=='l'){
+			float b;
+			int basis_bebas=0;
+			if(isdigit(input[i-1])){
+				b=DequeOperand(&*Z);
+				basis_bebas=1;
+			}
+			float hasil3=0,hasil2;
+			int o=1,t=1;
+			char valid[5];
+			valid[4]='\0';
+			valid[5]='\0';
+			valid[0]=token;
+			i++;
+			while(t<4){
+				valid[o]=input[i];
+				i++;
+				o++;
+				t++;
+			}
+			while((isdigit(input[i])||input[i]=='.')&&input[i]!=')'){
+				if(isdigit(input[i])){
+				hasil3=hasil3*10+(input[i]-'0');
+				i++;
+				}
+			}
+			if(input[i]==')'){
+				hasil2=operasilog(b,hasil3,valid,basis_bebas);
+				EnqueOperand(&*Z,hasil2,&P);
+			}else{
+				printf("format yang dimasukkan salah");
+			}
+		}else if(token=='!'){
+			float a,c;
+			char t;
+			t=token;
+			if(isdigit(input[i-1])){
+				a=DequeOperand(&*Z);
+				c=faktorial(a);
+				EnqueOperand(&*Z,c,&P);
+				
+			}else{
+				printf("format yang anda masukkan salah: ");
+			}
 		}
 		else{
 			PushStack(&*X,token,&P);
@@ -357,10 +528,40 @@ double kalkulasi(address P){
 			return Perkalian(kalkulasi(P->left),kalkulasi(P->right));
 		}else if(P->data=='^'){
 			return Perpangkatan(kalkulasi(P->left) , kalkulasi(P->right));
+		}else if(P->data=='V'){
+			return akar_pangkat_n(kalkulasi(P->right),kalkulasi(P->left));
 		}
 	}
 	
 	return P->operand;
 }
 
-
+float DequeOperand(Queue *A){
+	float q;
+	node First,Last,Throw;
+	First=A->First;
+	Last=A->Last;
+	if(First==NULL){
+		printf("Queue Empty");
+	}else{
+		if(First!=Last){
+			while(First->next!=Last){
+				First=First->next;
+			}
+			Throw=Last;
+			q=Last->operand;
+			A->Last=First;
+			A->Last->next=NULL;
+			free(Throw);
+			return q;
+		}else{
+			Throw=Last;
+			q=Last->operand;
+			A->Last=NULL;
+			A->First=NULL;
+			free(Throw);
+			return q;
+		}
+		
+	}
+}
