@@ -80,6 +80,7 @@ double tangen(double degree);
 double sinus(double degree);
 double to_radian(double degree);
 
+
 //Ahmad
 int loga(int a);
 int log_a_to_base_b(int a, int b);

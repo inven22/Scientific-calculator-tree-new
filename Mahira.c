@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <math.h>
 #include "header.h"
@@ -107,3 +108,4 @@ float atangen(float bil)
 	sum = acosinus(bagi);
 	return sum;
 }
+
