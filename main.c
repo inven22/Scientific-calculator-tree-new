@@ -5,7 +5,8 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
-	float hasil;
+	float hasil,a=2,c=1.5;
+	int g=1;
 	char input[30],temp;
 	address P;
 	Stack S;
@@ -15,6 +16,7 @@ int main(int argc, char *argv[]) {
 	Z.Last=NULL;
 	S.Head=NULL;
 	printf("enter expression:");
+	hasil=Perpangkatan(a,c);
 	scanf("%s",&input);fflush(stdin);
 	convertPostfix(&Z,&S,input);
 //	temp=PopStack(&X);

@@ -409,7 +409,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				basis_bebas=1;
 			}
 
-			double hasil3=0,hasil2;
+			double hasil3=0,hasil2=0;
 
 			int o=1,t=1;
 			char valid[5];

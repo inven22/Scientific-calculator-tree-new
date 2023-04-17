@@ -39,15 +39,44 @@ float akar_pangkat_n(int x,int n){
 
 
 float Perpangkatan(float bilangan, float pangkat){
- 	float hasil,i;
+ 	float hasil;
  	hasil=1;
- 	i=1;
+ 	float power=pangkat+0.0001,pow=pangkat,temp=1;
+ 	float i=1,n=1,j=1;
+ 	int tamp1=bilangan;
+ 	
  	if(bilangan!=0&&pangkat!=0){
-	 
- 	while(i<=pangkat){
- 		hasil=hasil*bilangan;
+ 	
+	while(n<=pangkat){
+	 	n++;
+	 	power--;
+	 }
+//	 if(power!=0){
+////	 	pow=pow-power;
+////	 	power=10*power;
+////	 	pow=10*pangkat;
+////	 	temp=pow+power;
+//	 power=1/power;
+//	 pow=pangkat*power;
+//	 }
+ 	while(i<=pow){
+ 		hasil=hasil*tamp1;
  		i++;
 	 } 
+	 if(power!=0){
+		 power=power*10;
+		 while(j<=power){
+	 		temp=temp*tamp1;
+	 		j++;
+		 } 
+		 temp=akar_pangkat_n(temp,10);
+		 hasil=hasil*temp;
+	 }
+//	 if(power!=0){
+//	 hasil=akar_pangkat_n(hasil,power);
+////		hasil=akar_pangkat_n(hasil,10);
+//
+//	 }
  	return hasil;
  	}else if(bilangan!=0&&pangkat==0){
  		return 1;
@@ -58,12 +87,12 @@ float Perpangkatan(float bilangan, float pangkat){
  }
  
  
- int log_a_to_base_b(int a, int b)
+ float log_a_to_base_b(int a, int b)
 {
     return log2(a) / log2(b);
 }
 
-int loga(int a){
+float loga(int a){
 	return log10(a);
 }
 
