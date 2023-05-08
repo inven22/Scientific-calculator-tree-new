@@ -116,6 +116,7 @@ float loga(int a);
 double log_a_to_base_b(double x, double b);
 
 
+
 #endif
 
 

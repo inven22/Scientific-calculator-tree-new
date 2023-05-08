@@ -2,35 +2,26 @@
 #include <stdlib.h>
 #include "header.h"
 
+// operasi penjumlahan
 double penjumlahan(double a, double b) {
     return a + b;
 }
 
+// operasi pengurangan
 double pengurangan(double a, double b) {
     return a - b;
 }
 
-//double sinus(double degree){
-//	double hasil;
-//	hasil = (sin(degree*(phi/180)));
-//	return hasil;
-//}
-//
-//double cosinus(double degree){
-//	double hasil;
-//	hasil = (cos(degree*(phi/180)));
-//	return hasil;
-//}
-//
-//double tangen(double degree){
-//	double hasil;
-//	hasil = (tan(degree*(phi/180)));
-//	return hasil;
-//}
-//
-//double pembulatan(double num){
-//    return round(num);
-//}
+// membulatkan desimal
+int pembulatan(double num) {
+    int result = 0;
+    if (num >= 0.5) {
+        result = (int)(num + 0.5);
+    } else {
+        result = 0;
+    }
+    return result;
+}
 
 // konversi sudut dalam derajat ke radian
 double to_radian(double degree) {
@@ -66,6 +57,7 @@ double cosinus(double degree) {
     return result;
 }
 
+// menghitung nilai tangen
 double tangen(double degree) {
     return sinus(degree) / cosinus(degree);
 } 
