@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include "header.h"
 
+//TENDY
 void InfixToPostfix(infotype* input, infotype postfix[]){
 	infotype stack[50], c;
 	int i, length,top=-1, x=0,oper1, oper2;
@@ -64,7 +65,7 @@ int derajatOperator(infotype oper){
 	}
 }
 
-float operasi_trigono(char* tes,float oprtr){
+float operasi_trigono(char* tes,float oprtr,int *invalid){
 	float hasil;
 	if (strcmp(tes,"sin(")==0){
 		hasil=sinus(oprtr);
@@ -96,6 +97,7 @@ float operasi_trigono(char* tes,float oprtr){
 	}
 	else{
 		printf("format salah");
+		*invalid=1;
 		return 0;
 	}
 }
@@ -170,6 +172,34 @@ void PostOrder(address P){
 		}
 	}
 }
+
+void PreOrder(address P){
+	
+	if(P!=Nil){
+		if(P->isOperator==1){
+		printf("%c ", P->data);
+		}else{
+		printf("%g ",P->operand);
+		}
+		PostOrder(left(P));
+		PostOrder(right(P));
+	}
+}
+
+
+void InOrder(address P){
+	
+	if(P!=Nil){
+		PostOrder(left(P));
+		if(P->isOperator==1){
+		printf("%c ", P->data);
+		}else{
+		printf("%g ",P->operand);
+		}
+		PostOrder(right(P));
+	}
+}
+
 
 void PushStack(Stack *First,char item,node *P){
 	*P = (node) malloc (sizeof (ElmtList));
@@ -281,7 +311,7 @@ void EnqueOperand(Queue *First,float item,node *P){
 }
 }
 //float kalkulasi()
-void convertPostfix(Queue *Z,Stack *X,char *input){
+void convertPostfix(Queue *Z,Stack *X,char *input,int *invalid){
 	node P;
 	char token,c,negatif;
 	int num3=10;
@@ -329,7 +359,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				PopStack(&*X);
 			}else{
 				printf("format yang dimasukkan salah\n");
-				break;
+				
 			}
 		}
 		else if(token=='('){
@@ -356,11 +386,12 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				
 			}
 			if(input[i]==')'){
-				hasil2=operasi_trigono(valid,hasil3);
+				hasil2=operasi_trigono(valid,hasil3,&*invalid);
 				EnqueOperand(&*Z,hasil2,&P);
 			}else{
 				printf("format yang dimasukkan salah");
-				break;
+				*invalid=1;
+		
 			}
 		}else if(token=='a'){
 			float hasil3=0,hasil2,hasil1=10;
@@ -395,11 +426,11 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 			}
 			}
 			if(input[i]==')'){
-				hasil2=operasi_trigono(valid,hasil3);
+				hasil2=operasi_trigono(valid,hasil3,&*invalid);
 				EnqueOperand(&*Z,hasil2,&P);
 			}else{
 				printf("format yang dimasukkan salah");
-				break;
+				*invalid=1;
 			}
 		}else if(token=='l'){
 			float b;
@@ -408,9 +439,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				b=DequeOperand(&*Z);
 				basis_bebas=1;
 			}
-
 			double hasil3=0,hasil2=0;
-
 			int o=1,t=1;
 			char valid[5];
 			valid[4]='\0';
@@ -434,6 +463,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				EnqueOperand(&*Z,hasil2,&P);
 			}else{
 				printf("format yang dimasukkan salah");
+				*invalid=1;
 			}
 		}else if(token=='!'){
 			float a,c;
@@ -446,6 +476,7 @@ void convertPostfix(Queue *Z,Stack *X,char *input){
 				
 			}else{
 				printf("format yang anda masukkan salah: ");
+				*invalid=1;
 			}
 		}
 		else{
