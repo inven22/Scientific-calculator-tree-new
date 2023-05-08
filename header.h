@@ -113,7 +113,8 @@ double to_radian(double degree);
 
 //Ahmad
 float loga(int a);
-float log_a_to_base_b(int a, int b);
+double log_a_to_base_b(double x, double b);
+
 
 
 #endif
