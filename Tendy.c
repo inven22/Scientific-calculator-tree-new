@@ -87,14 +87,14 @@ float Perpangkatan(float bilangan, float pangkat){
  }
  
  
- float log_a_to_base_b(int a, int b)
-{
-    return log2(a) / log2(b);
-}
-
-float loga(int a){
-	return log10(a);
-}
+// float log_a_to_base_b(int a, int b)
+//{
+//    return log2(a) / log2(b);
+//}
+//
+//float loga(int a){
+//	return log10(a);
+//}
 
 float cosecan(float oprtr){
 	return (1/sinus(oprtr));
