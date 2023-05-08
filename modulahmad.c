@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<math.h>
 #include "header.h"
 
+//AHMAD 
 float taylor(float number)
 {
     float hasil_log = 0.0;
@@ -34,13 +36,37 @@ float taylor(float number)
     return (float)hasil_log;
 }
 
-
-int log_a_to_base_b(int a, int b)
-{
-    return log2(a) / log2(b);
+double ln(double x, int n) {
+    if(x <= 0) {
+        printf("Error: x must be positive");
+        exit(1);
+    }
+    double sum = 0;
+    double y = (x - 1) / (x + 1);
+    int i;
+    for(i = 1; i <= n; i++) {
+        double term = pow(y, 2 * i - 1) / (2 * i - 1);
+        sum += term;
+    }
+    return 2 * sum;
 }
 
-int loga(int a){
+double log_a_to_base_b(double x, double b) {
+	int n=100;
+    if(x <= 0 || b <= 0) {
+        printf("Error: x and b must be positive");
+        exit(1);
+    }
+    double ln_x = ln(x, n);
+    double ln_b = ln(b, n);
+    if(ln_b == 0) {
+        printf("Error: log of base 1 is undefined");
+        exit(1);
+    }
+    return ln_x / ln_b;
+}
+
+float loga(int a){
 	return log10(a);
 }
 
