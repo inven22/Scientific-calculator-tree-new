@@ -52,7 +52,7 @@ double ln(double x, int n) {
 }
 
 double log_a_to_base_b(double x, double b) {
-	int n=100;
+	int n=1000000;
     if(x <= 0 || b <= 0) {
         printf("Error: x and b must be positive");
         exit(1);
