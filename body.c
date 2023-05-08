@@ -39,7 +39,7 @@ float operasi_trigono(char* tes,float oprtr,int *invalid){
 		hasil=cosecan(oprtr);
 		return hasil;
 	}else if(strcmp(tes,"sec(")==0){
-		hasil=cosecan(oprtr);
+		hasil=secan(oprtr);
 		return hasil;
 	}else if(strcmp(tes,"cot(")==0){
 		hasil=cotangen(oprtr);
