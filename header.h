@@ -40,9 +40,11 @@ int isOperator(infotype oper);
 address CreateNode(infotype data);
 address BuildTree(infotype postfix[]);
 void PostOrder(address P);
+void PreOrder(address P);
+void InOrder(address P);
 void ViewAsc(Queue First);
 void EnqueOperand(Queue *First,float item,node *P);
-void convertPostfix(Queue *Z,Stack *X,char *input);
+void convertPostfix(Queue *Z,Stack *X,char *input,int *invalid);
 void ViewAscStack(Stack First);
 void PushStack(Stack *First,char item,node *P);
 char PopStack(Stack *First);
@@ -50,9 +52,9 @@ address Create_Tree(Queue Z);
 address CreateNodeOperand(float input);
 address CreateNodeOperator(char input);
 double kalkulasi(address P);
-float operasi_trigono(char* tes,float oprtr);
+float operasi_trigono(char* tes,float oprtr,int *invalid);
 float DequeOperand(Queue *A);
-float operasi_trigono(char* tes,float oprtr);
+//float operasi_trigono(char* tes,float oprtr);
 float operasilog(float a,float b,char *tes,int basis_bebas);
 
 //Tendy
@@ -62,6 +64,10 @@ float Perpangkatan(float bilangan, float pangkat);
 float cosecan(float oprtr);
 float secan(float oprtr);
 float cotangen(float oprtr);
+void menu();
+void loading();
+void display_animation(char *loading);
+
 
 //Mahira
 float persen(float bil);

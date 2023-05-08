@@ -107,3 +107,42 @@ float secan(float oprtr){
 float cotangen(float oprtr){
 	return (1/tangen(oprtr));
 }
+
+
+
+void display_animation(char *loading) {
+    // Define the animation frames
+    const char* frames[] = {"|", "/", "-", "\\"};
+    const int num_frames = sizeof(frames) / sizeof(frames[0]);
+    int i=0;
+    // Loop through the animation frames
+    
+    while (i < 100000) {
+        printf("\t\t\t\t\t\t%s %s %s\r", frames[i % num_frames],loading, frames[i % num_frames]);
+       
+        fflush(stdout);
+        usleep(1000000);  // Wait for 100 milliseconds
+        i++;
+    }
+    printf("\nFinish loading. click enter\n");
+    system("pause");
+    system("cls");
+}
+
+
+
+
+void menu(){
+	printf("------------------------------------------\n");
+	printf("|  sin  |   asin  |   *   |   V   |   ^  |\t\t\t Aturan\n");
+	printf("------------------------------------------\t\t\t ------\n");
+	printf("|  cos  |   acos  |   7   |   8   |   9  |  1. TrigonoMetri: Operasi Trigonometri(sudut). misal :sin(90)\n");
+	printf("------------------------------------------  2. Logaritma: log(angka) atau (basis)log(angka) misal: log(10) atau 2log(2)\n");
+	printf("|  tan  |   atan  |   4   |   5   |   6  |\n");
+	printf("------------------------------------------\n");
+	printf("|  csc  |   cot   |   1   |   2   |   3  |\n");
+	printf("------------------------------------------\n");
+	printf("|  sec  |   log   |   +   |   -   |   /  |\n");
+	printf("-------------------------------------------\n");
+	
+}
