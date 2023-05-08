@@ -70,7 +70,7 @@ float operasilog(float a,float b,char *tes,int basis_bebas){
 		return hasil;	
 		}
 		else{
-		hasil=loga(b);
+		hasil=log_a_to_base_b(b,10);
 		return hasil;
 		}
 	}else{
