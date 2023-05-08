@@ -6,51 +6,7 @@
 #include "header.h"
 
 //TENDY
-void InfixToPostfix(infotype* input, infotype postfix[]){
-	infotype stack[50], c;
-	int i, length,top=-1, x=0,oper1, oper2;
-	
-	length=strlen(input);
-	printf("length: %d \n", length);
-	printf("input: %s \n", input);
-	
-	for(i=0;i<length;i++){
-		c=input[i];
-		if(isdigit(c)){
-//			char num[length];
-//			int j=0;
-//			while(isdigit(input[i] || input[i]=='.')){
-//				num[j++]=input[i];
-//				i++;
-//			}
-//			i--;
-//			postfix[x++]=num;
-			postfix[x++]=c;
-		} else{
-			if(isOperator(c) && top!=-1 && stack[top]!='('){
-//				printf("\noper: %c", c);
-//				printf("\ntop: %c", stack[top]);
-				oper1=derajatOperator(c);
-				oper2=derajatOperator(stack[top]);
-				while(oper1<=oper2 && top!=-1 ){
-					postfix[x++]=stack[top--];
-				}
-				stack[++top]=c;
-			} else if(c==')'){
-//				printf("\noper: %c", c);
-				postfix[x++]=stack[top--];
-				top--;	
-			} else{
-				stack[++top]=c;
-			}
-		}
-		
-	}
-	while(top!=-1){
-		postfix[x++]=stack[top--];
-	}
-	postfix[x] = '\0';
-}
+
 
 int derajatOperator(infotype oper){
 	if(oper=='+' || oper=='-'){
@@ -64,7 +20,10 @@ int derajatOperator(infotype oper){
         exit(1);
 	}
 }
-
+/*
+Dimasukkan parameter passing by value pada modul ini 
+Tujuan: untuk mengetahui derajat dari suatu operator
+*/
 float operasi_trigono(char* tes,float oprtr,int *invalid){
 	float hasil;
 	if (strcmp(tes,"sin(")==0){
@@ -101,7 +60,8 @@ float operasi_trigono(char* tes,float oprtr,int *invalid){
 		return 0;
 	}
 }
-
+//modul ini digunakan untuk mengetahui operasi trigono mana yang digunakan 
+//serta mengetahui format yang salah pada input
 float operasilog(float a,float b,char *tes,int basis_bebas){
 	float hasil;
 	if(strcmp(tes,"log(")==0){
@@ -119,14 +79,15 @@ float operasilog(float a,float b,char *tes,int basis_bebas){
 	}
 	
 }
-
+//modul ini digunakan untuk mengetahui operasi logaritma mana yang digunakan 
+//serta mengetahui format yang salah pada input
 int isOperator(infotype oper){
 	if(oper=='+' || oper=='-' || oper=='*' || oper=='/' || oper=='^' || oper=='v'){
 		return 1;
 	} 
 	return 0;
 }
-
+//modul  ini digunakan untuk mengetahui char dari string operator atau bukan
 address CreateNode(infotype data){
 	address P;
 	
@@ -137,28 +98,7 @@ address CreateNode(infotype data){
 	
 	return P;
 }
-
-address BuildTree(infotype postfix[]){
-	address P;
-	address stack[50];
-	int i, len, top=-1;
-	infotype c;
-	
-	len=strlen(postfix);
-	
-	for(i=0;i<len;i++){
-		c=postfix[i];
-		if(isdigit(c)){
-			P=CreateNode(c);
-		} else{
-			P=CreateNode(c);
-			right(P)=stack[top--];
-			left(P)=stack[top--];
-		}
-		stack[++top]=P;
-	}
-	return(stack[0]);
-}
+//modul ini digunakan untuk membuat  node yang bertype tree
 
 void PostOrder(address P){
 	
@@ -172,7 +112,7 @@ void PostOrder(address P){
 		}
 	}
 }
-
+//modul ini digunakan untuk tranversal Tree secara PostOrder
 void PreOrder(address P){
 	
 	if(P!=Nil){
@@ -185,7 +125,7 @@ void PreOrder(address P){
 		PostOrder(right(P));
 	}
 }
-
+//modul ini digunakan untuk tranversal Tree secara PreOrder
 
 void InOrder(address P){
 	
@@ -199,7 +139,7 @@ void InOrder(address P){
 		PostOrder(right(P));
 	}
 }
-
+//modul ini digunakan untuk tranversal Tree secara InOrder
 
 void PushStack(Stack *First,char item,node *P){
 	*P = (node) malloc (sizeof (ElmtList));
@@ -221,7 +161,7 @@ void PushStack(Stack *First,char item,node *P){
 	
 }
 }
-
+//modul ini digunakan untuk memasukkan suatu char kedalam stack
 char PopStack(Stack *First){
 	node P;
 	P=First->Head;
@@ -229,8 +169,7 @@ char PopStack(Stack *First){
 	return P->oprtr;
 	free(P);
 }
-
-
+//modul ini digunakan untuk mengeluarkan top dari stack dan mereturnkan isinya
 void ViewAsc(Queue First){
 	node P;
 	P=First.First;
@@ -249,7 +188,7 @@ void ViewAsc(Queue First){
 		printf("list kosong");
 	}
 }
-
+//modul ini digunakan untuk menampilkan queue secara ascending
 void ViewAscStack(Stack First){
 	node P;
 	P=First.Head;
@@ -268,7 +207,7 @@ void ViewAscStack(Stack First){
 		printf("list kosong");
 	}
 }
-
+//modul ini digunakan untuk menampilkan stack secara ascending
 void EnqueOperator(Queue *First,char item,node *P){
 	*P = (node) malloc (sizeof (ElmtList));
 	if(P==NULL){
@@ -289,8 +228,9 @@ void EnqueOperator(Queue *First,char item,node *P){
 	
 }
 }
-
+//modul yang digunakan untuk memasukkan char yang merupakan operator ke queue
 void EnqueOperand(Queue *First,float item,node *P){
+	
 	*P = (node) malloc (sizeof (ElmtList));
 	if(P==NULL){
 		printf("Gagal Alokasi");
@@ -310,7 +250,7 @@ void EnqueOperand(Queue *First,float item,node *P){
 	
 }
 }
-//float kalkulasi()
+//modul yang digunakan untuk memasukkan interger yang merupakan operand ke queue
 void convertPostfix(Queue *Z,Stack *X,char *input,int *invalid){
 	node P;
 	char token,c,negatif;
@@ -490,7 +430,8 @@ void convertPostfix(Queue *Z,Stack *X,char *input,int *invalid){
 	
 	
 }
-
+// modul  yang digunakan untuk merubah string yang berupa operasi infix menjadi postfix
+// bentuk :queue
 address Create_Tree(Queue Z){
 	
 	address P;
@@ -524,7 +465,7 @@ address Create_Tree(Queue Z){
 	}
 	return(stack[0]);
 }
-
+//membentuk tree  dari  queue yang telah disediakan yang berisikan postfix
 address CreateNodeOperand(float input){
 	address P;
 	P = (address) malloc (sizeof (Tree));
@@ -535,7 +476,7 @@ address CreateNodeOperand(float input){
 	return P;
 	
 }
-
+//untuk membuat node dengan tipe tree yang berisikan operand dari queue postfix
 address CreateNodeOperator(char input){
 		address P;
 	P = (address) malloc (sizeof (Tree));
@@ -546,7 +487,7 @@ address CreateNodeOperator(char input){
 	return P;
 	
 }
-
+//untuk membuat node dengan tipe tree yang berisikan  operator dari queue postfix
 double kalkulasi(address P){
 	if(P->isOperator==1){
 		if(P->data=='+'){
@@ -568,8 +509,10 @@ double kalkulasi(address P){
 	
 	return P->operand;
 }
-
+// untuk mengkalkulasikan isi dari tree
 float DequeOperand(Queue *A){
+	
+	
 	float q;
 	node First,Last,Throw;
 	First=A->First;
@@ -598,3 +541,6 @@ float DequeOperand(Queue *A){
 		
 	}
 }
+// mendelete queue terakhir dari suatu queue yang berisikan operand
+
+
