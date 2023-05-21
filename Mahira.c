@@ -102,4 +102,3 @@ float atangen(float bil)
 	jumlah = acosinus(bagi);
 	return jumlah;
 }
-
