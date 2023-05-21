@@ -35,52 +35,70 @@ typedef struct {
 
 
 int derajatOperator(infotype oper);
-/*
-Dimasukkan parameter passing by value pada modul ini 
-Tujuan: untuk mengetahui derajat dari suatu operator
-*/
+//Dimasukkan parameter passing by value pada modul ini 
+//Tujuan: untuk mengetahui derajat dari suatu operator
+
+float operasi_trigono(char *tes, float oprtr, int *invalid);
+//Tujuan: mengetahui operasi trigonometri yang digunakan 
+
+float operasilog(float a, float b, char *tes, int basis_bebas);
+//Tujuan: mengetahui operasi logaritma yang digunakan 
+
 int isOperator(infotype oper);
-//modul ini digunakan untuk mengetahui operasi logaritma mana yang digunakan 
-//serta mengetahui format yang salah pada input
+//Tujuan: mengetahui char dari string apakah sebuah operator
+
 address CreateNode(infotype data);
-//modul ini digunakan untuk membuat  node yang bertype tree
+//Tujuan: membuat node bertipe Tree
+
 void PostOrder(address P);
-//modul ini digunakan untuk tranversal Tree secara PostOrder
+//Tujuan: traversal Tree secara PostOrder
+
 void PreOrder(address P);
-//modul ini digunakan untuk tranversal Tree secara PreOrder
+//Tujuan: traversal Tree secara PreOrder
+
 void InOrder(address P);
-//modul ini digunakan untuk tranversal Tree secara InOrder
-void ViewAsc(Queue First);
-//modul ini digunakan untuk menampilkan queue secara ascending
-void EnqueOperand(Queue *First,float item,node *P);
-//modul yang digunakan untuk memasukkan interger yang merupakan operand ke queue
-void EnqueOperator(Queue *First,char item,node *P);
-//modul yang digunakan untuk memasukkan char yang merupakan operator ke queue
-void convertPostfix(Queue *Z,Stack *X,char *input,int *invalid);
-// modul  yang digunakan untuk merubah string yang berupa operasi infix menjadi postfix
-// bentuk :queue
-void ViewAscStack(Stack First);
-//modul ini digunakan untuk menampilkan stack secara ascending
-void PushStack(Stack *First,char item,node *P);
-//modul ini digunakan untuk memasukkan suatu char kedalam stack
+//Tujuan: traversal Tree secara InOrder
+
+void PushStack(Stack *First, char item, node *P);
+//Tujuan: memasukkan suatu char kedalam stack
+
 char PopStack(Stack *First);
-//modul ini digunakan untuk mengeluarkan top dari stack dan mereturnkan isinya
+//Tujuan: mengeluarkan top dari stack dan mengembalikan isinya
+
+void ViewAsc(Queue First);
+//Tujuan: menampilkan queue secara ascending
+
+void ViewAscStack(Stack First);
+//Tujuan: menampilkan stack secara ascending
+
+void EnqueOperator(Queue *First, char item, node *P);
+//Tujuan: memasukkan operator bertipe data char ke queue
+
+void EnqueOperand(Queue *First, float item, node *P);
+//Tujuan: memasukkan operand bertipe data integer ke queue
+
+void convertPostfix(Queue *Z, Stack *X, char *input, int *invalid);
+//Tujuan: mengubah string berupa operasi infix menjadi postfix
+//Bentuk: queue
+
 address Create_Tree(Queue Z);
-//membentuk tree  dari  queue yang telah disediakan yang berisikan postfix
+//Tujuan: membentuk tree dari queue yang telah disediakan berisi operasi postfix
+
 address CreateNodeOperand(float input);
-//untuk membuat node dengan tipe tree yang berisikan operand dari queue postfix
+//Tujuan: membuat node bertipe tree yang berisi operand dari queue postfix
+
 address CreateNodeOperator(char input);
-//untuk membuat node dengan tipe tree yang berisikan  operator dari queue postfix
+//Tujuan: membuat node bertipe tree yang berisi operator dari queue postfix
+
 double kalkulasi(address P);
-//// untuk mengkalkulasikan isi dari tree
-float operasi_trigono(char* tes,float oprtr,int *invalid);
-//modul ini digunakan untuk mengetahui operasi trigono mana yang digunakan 
-//serta mengetahui format yang salah pada input
+//Tujuan: mengalkulasikan isi dari tree
+
 float DequeOperand(Queue *A);
-//float operasi_trigono(char* tes,float oprtr);
-float operasilog(float a,float b,char *tes,int basis_bebas);
-//modul ini digunakan untuk mengetahui operasi logaritma mana yang digunakan 
-//serta mengetahui format yang salah pada input
+//Tujuan: menghapus queue terakhir dari suatu queue yang berisi operand
+
+
+/* ===================================== Function ===================================== */
+
 //Tendy
 float Perkalian(float bilangan1, float bilangan2);
 float akar_pangkat_n(int x,int n);
@@ -99,10 +117,10 @@ float faktorial(float bil);
 float asinus(float bil);
 float acosinus(float bil);
 float atangen(float bil);
-
 float mutlak(float bil);
 float arcsin(float bil);
 float squareroot(float x);
+
 
 //Agista
 double cosinus(double degree);
@@ -118,5 +136,3 @@ double log_a_to_base_b(double x, double b);
 
 
 #endif
-
-

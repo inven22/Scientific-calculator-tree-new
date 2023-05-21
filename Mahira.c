@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <math.h>
 #include "header.h"
@@ -25,6 +24,7 @@ float mutlak(float bil)
 float faktorial(float bil)
 {
 	int result = 1, i = 0;
+	
 	if(bil == 0)
 	{
 		return 1;
@@ -42,10 +42,12 @@ float faktorial(float bil)
 
 float asinus(float bil)
 {
+	//kamus data lokal
     float sum = bil;
     float term = bil;
     int n = 1;
-//    mutlak(term) > 0.000000000001
+
+	//program
     while(mutlak(term) > 0.000001) 
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
@@ -57,10 +59,12 @@ float asinus(float bil)
 
 float acosinus(float bil)
 {
+	//kamus data lokal
 	float sum = bil;
     float term = bil;
     int n = 1;
-//    mutlak(term) > 0.000000000001
+    
+    //program
     while(mutlak(term) > 0.000001) 
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
@@ -70,27 +74,14 @@ float acosinus(float bil)
     return ((phi/2)-sum)*180.0/phi;
 }
 
-//float atangen(float bil)
-//{
-//	float sum = 0.0;
-//    float term = bil;
-//    int n = 1;
-////    mutlak(term) > 0.00000000000001
-//    while(term != 0.0) 
-//	{
-//		sum = sum + term;		
-//        term = term*-bil*bil/(2*n+2);
-//        n++;
-//    }
-//    return sum*180.0/phi;
-//}
-
 float squareroot(float x) 
 {
+	//kamus data lokal
     float tebakan = 1.0;
     float prev_tebakan;
     float selisih;
     
+    //program
     do 
 	{
 		prev_tebakan = tebakan;
@@ -102,7 +93,10 @@ float squareroot(float x)
 
 float atangen(float bil)
 {
+	//kamus data lokal
 	float sum, akar, bagi;
+	
+	//program
 	akar = squareroot(1+bil*bil);
 	bagi = 1/akar;
 	sum = acosinus(bagi);
