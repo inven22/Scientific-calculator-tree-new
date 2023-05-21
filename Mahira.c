@@ -43,35 +43,35 @@ float faktorial(float bil)
 float asinus(float bil)
 {
 	//kamus data lokal
-    float sum = bil;
+    float jumlah = bil;
     float term = bil;
     int n = 1;
 
 	//program
-    while(mutlak(term) > 0.000001) 
+    while(mutlak(term) > 0.000001) //menggunakan deret taylor
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
-		sum = sum + term;
+		jumlah = jumlah + term;
         n++;
     }
-    return sum*180.0/phi;
+    return jumlah*180.0/phi;
 }
 
 float acosinus(float bil)
 {
 	//kamus data lokal
-	float sum = bil;
+	float jumlah = bil;
     float term = bil;
     int n = 1;
     
     //program
-    while(mutlak(term) > 0.000001) 
+    while(mutlak(term) > 0.000001) //menggunakan deret taylor
 	{
     	term = term*bil*bil*(2*n-1)*(2*n-1)/(2*n*(2*n+1));
-		sum = sum + term;
+		jumlah = jumlah + term;
         n++;
     }
-    return ((phi/2)-sum)*180.0/phi;
+    return ((phi/2)-jumlah)*180.0/phi;
 }
 
 float squareroot(float x) 
@@ -94,12 +94,11 @@ float squareroot(float x)
 float atangen(float bil)
 {
 	//kamus data lokal
-	float sum, akar, bagi;
+	float jumlah, akar, bagi;
 	
 	//program
 	akar = squareroot(1+bil*bil);
 	bagi = 1/akar;
-	sum = acosinus(bagi);
-	return sum;
+	jumlah = acosinus(bagi);
+	return jumlah;
 }
-
